@@ -1,0 +1,105 @@
+{% extends "base.jinja" %}
+{% block title %}Home{% endblock %}
+{% block device_active %}active{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='device.css') }}">
+{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="row">
+      <h1 class="text-center mt-5">Device {{ device }}</h1>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-2">
+      <div class="card">
+        <div class="card-header">
+          Device status
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Online
+          </p>
+        </div>     
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header">
+          Sensor detail
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            {% if data %}
+            <ul>
+              <li>
+                <p>Temerature: {{ data["temperature"] }} &deg;C</p>
+              </li>
+              <li>
+                <p>Humidity: {{ data["humidity"] }} %</p>
+              </li>
+              <li>
+                {% if data["fan"] %}
+                  <p class="green-dot">Fan: On</p>
+                {% else %}
+                  <p class="red-dot">Fan: Off</p>
+                {% endif %}
+              </li>
+              <li>
+                {% if data["led"] %}
+                  <p class="green-dot">LED: On</p>
+                {% else %}
+                  <p class="red-dot">LED: Off</p>
+                {% endif %}
+              </li>
+            </ul>
+            {% else %}
+            <p>No data</p>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header">
+          Fan
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            {% if data %}
+              {% if data["fan"] %}
+                <a class="btn btn-primary" href="{{ url_for('device', device=device, fan='0') }}">Turn off</a>
+              {% else %}
+                <a class="btn btn-primary" href="{{ url_for('device', device=device, fan='1') }}">Turn on</a>
+              {% endif %}
+            {% else %}
+              <p>No data</p>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          LED
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            {% if data %}
+              {% if data["led"] %}
+                <a class="btn btn-primary" href="{{ url_for('device', device=device, led='0') }}">Turn off</a>
+              {% else %}
+                <a class="btn btn-primary" href="{{ url_for('device', device=device, led='1') }}">Turn on</a>
+              {% endif %}
+            {% else %}
+              <p>No data</p>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.jinja" %}
+{% block title %}Home{% endblock %}
+{% block home_active %}active{% endblock %}
+{% block
+body %}
+<div class="container">
+  <div class="row">
+    <div class="row">
+      <h1 class="text-center mt-5">System Statistics</h1>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-2">
+      <div class="card">
+        <div class="card-header">
+          System status
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <p>Online: {{ device_count }}</p>
+            <p>Offline: 2</p> 
+          </p>
+        </div>
+        <div class="card-footer">
+          Total Device: 3
+        </div>      
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header">
+          Online Devices
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <ul>
+              {% for device in devices %}
+                <li>
+                  <a href="/device/{{ device }}">{{ device }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header">
+          Offline Devices
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <ul>
+              <li>
+                <a href="/device/192.168.88.140">192.168.88.140</a>
+              </li>
+              <li>
+                <a href="/device/192.168.88.141">192.168.88.141</a>
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
