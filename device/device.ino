@@ -72,7 +72,7 @@ void setup(){
     fan = 0;
     request->send(200, "text/plain", "FAN OFF");
   });
-  // Fan API
+  // Led API
   server.on("/ledOn", HTTP_GET, [](AsyncWebServerRequest *request){
     digitalWrite(LEDPIN, HIGH);
     led = 1;
