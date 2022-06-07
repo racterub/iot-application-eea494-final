@@ -19,9 +19,15 @@
           Device status
         </div>
         <div class="card-body">
-          <p class="card-text">
-            Online
-          </p>
+          {% if data %}
+            <p class="card-text">
+              Online
+            </p>
+          {% else %}
+            <p class="card-text">
+              Offline
+            </p>
+          {% endif %}
         </div>     
       </div>
     </div>
